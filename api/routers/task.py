@@ -3,9 +3,9 @@ from fastapi import APIRouter
 router = APIRouter()
 
 
-@router.get("/tasks")
+@router.get("/tasks", Response_model=List[task_schema.Task])
 async def list_tasks():
-    pass
+    return [task_schema.Task(id=1, title="1つ目のTODOタスク")]
 
 
 @router.post("/tasks")
