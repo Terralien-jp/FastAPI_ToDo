@@ -1,9 +1,21 @@
 from typing import Optional
+from pydantic import BaseModel, Field
 
-from pydantic import BaseModel, field
+class TaskBase(BaseModel):
+    title: Optional[str] = Field(None, example="クリーニングを鶏肉")
 
+class TaskCreate(TaskBase):
+    pass
 
-class Task(BaseModel):
+class TaskCreateResponse(TaskCreate):
     id: int
-    title: Optionai[str] = Field(None, example="クリーニングを鶏肉")
-    done: bool = FIeld(False, description="完了フラグ")
+
+    class Config:
+        orm_mode = True
+
+# class Task(TaskBase):
+#     id: int
+#     done: bool = Field(False, description="完了フラグ")
+
+#     class Config:
+#         orm_mode = True
